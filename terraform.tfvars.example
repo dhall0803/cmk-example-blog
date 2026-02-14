@@ -1,0 +1,14 @@
+# Azure Subscription ID
+# Find this in the Azure Portal or run: az account show --query id -o tsv
+subscription_id = "00000000-0000-0000-0000-000000000000"
+
+# IP addresses allowed to access the Key Vault (in CIDR notation)
+# Find your public IP: curl -s https://ifconfig.me
+# Example: ["1.2.3.4/32"]
+admin_ip_addresses = ["YOUR.IP.ADDRESS/32"]
+
+# Resource Group Name (optional - has default value)
+# resource_group_name = "rg-storage-cmk-demo"
+
+# Azure Region (optional - has default value)
+# location = "uksouth"
