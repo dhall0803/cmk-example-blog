@@ -64,11 +64,16 @@ resource "azurerm_role_assignment" "kv_admin" {
   principal_id         = data.azurerm_client_config.current.object_id
 }
 
+resource "time_sleep" "wait_for_kv_admin" {
+  depends_on      = [azurerm_role_assignment.kv_admin]
+  create_duration = "60s"
+}
+
 # --------------------------
 # Key Vault Key (CMK)
 # --------------------------
 resource "azurerm_key_vault_key" "cmk" {
-  depends_on = [ azurerm_role_assignment.kv_admin ]
+  depends_on = [time_sleep.wait_for_kv_admin]
   name         = "sa-cmk-key"
   key_vault_id = azurerm_key_vault.kv.id
   key_type     = "RSA"
